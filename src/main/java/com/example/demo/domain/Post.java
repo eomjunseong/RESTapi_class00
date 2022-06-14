@@ -18,10 +18,9 @@ public class Post {
     private Long id;
 
     private String title;
-    private String Content;
+    private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
     @JoinColumn(name="member_id")
     private Member member;
 }

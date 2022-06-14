@@ -4,6 +4,7 @@ import com.example.demo.domain.Member;
 import com.example.demo.domain.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -36,5 +37,22 @@ public class PostRepository {
                 .getResultList();
     }
 
+    //삭제
+    public void deletePostById(Long id){
+        Post post = em.find(Post.class, id);
+        em.remove(post);
+    }
 
+    //업데이트
+    //merge x 변경 감지O
+    public void updatePost(Long id, String title, String content){
+        Post post = em.find(Post.class, id);
+        post.setTitle(title);
+        post.setContent(content);
+    }
+
+
+    public Post findById(Long id) {
+        return em.find(Post.class,id);
+    }
 }
